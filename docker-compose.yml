@@ -12,14 +12,12 @@ services:
       - mysql
     ports:
       - "${NGINX_HOST_HTTP_PORT}:8080"
-      # - "${NGINX_HOST_HTTP_PORT2}:8282"
       - "${NGINX_HOST_HTTPS_PORT}:443"
     volumes:
       - ./nginx/nginx.conf:${NGINX_CONF_PATH}
       - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
       - ${NGINX_SSL_PATH}:/etc/nginx/ssl
-      - ${VOCAL_VAULT_API_HOST_PATH}:/var/www/jobs-app
-      - ${VOCAL_VAULT_WEBAPP_HOST_PATH}:/home/node/jobs-app-webapp
+      - ${JOBS_APP_HOST_PATH}:/var/www/jobs-app
     networks:
       - jobs-app-network
 
@@ -36,7 +34,7 @@ services:
     tty: true
     working_dir: /var/www/jobs-app
     volumes:
-      - ${VOCAL_VAULT_API_HOST_PATH}:/var/www/jobs-app
+      - ${JOBS_APP_HOST_PATH}:/var/www/jobs-app
       - ${SSH_LOCAL_PATH}:${SSH_CONTAINER_PATH}
     networks:
       - jobs-app-network
@@ -69,9 +67,9 @@ services:
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306
-      MYSQL_USER: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MAX_EXECUTION_TIME: ${MAX_EXECUTION_TIME}
       MEMORY_LIMIT: ${MEMORY_LIMIT}
       UPLOAD_LIMIT: ${UPLOAD_LIMIT}
