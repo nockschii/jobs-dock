@@ -1,0 +1,62 @@
+# vocal-vault-dock
+
+This project is made for local development
+
+Using docker-compose
+
+services like
+
+- vocal-vault-api
+- vocal-vault-frontend (name not set)
+- nginx
+- mysql
+- phpMyAdmin
+- redis
+
+are created and started via docker containers defined in docker-compose.yaml
+
+## Requirements for local development
+
+- any linux dist with Docker capabilities
+- Windows
+  - WSL2
+    - needs to be installed on WSL2
+      - docker-compose
+      - buildx
+  - Docker Destkop
+- hosts file entry (restart WSL2 it takes network settings from Windows OS)
+  - `127.0.0.1 vocal-vault-api.alphadev.local` (vocal-vault-api)
+  <!-- - `127.0.0.1 kijufy.alphadev.local` (kijufy-remixjs) -->
+
+### macOS
+
+- Docker Desktop
+  - make sure docker-compose is installed
+  - also make sure hosts file are entries like in windows
+    - path should be /private/etc/hosts (source: google)
+    - https://www.nexcess.net/help/how-to-find-the-hosts-file-on-my-mac/
+
+## Setup
+
+After cloning kijufy-backend into your desired folder.
+
+Go to root folder and run `docker-compose up -d`
+
+When installation is done, go into the kijufy-backend container via WSL2 with
+
+`docker exec -it vocal-vault-api bash`. There install dependencies with
+
+<!-- `docker exec -it kijufy-remixjs sh`. -->
+
+`composer install` or use
+
+`docker-compose exec -w /var/www/vocal-vault-api/ vocal-vault-api composer install`
+
+you can also run other commands in your container without entering it
+
+`docker-compose exec -w /path/to/run/cmd desiredContainer any command`
+
+When dependencies are installed try visiting
+
+- `https://vocal-vault-api.alphadev.local/`.
+<!-- - `https://kijufy.alphadev.local/`. -->
