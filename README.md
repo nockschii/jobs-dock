@@ -1,4 +1,4 @@
-# vocal-vault-dock
+# jobs-dock
 
 This project is made for local development
 
@@ -36,15 +36,13 @@ are created and started via docker containers defined in docker-compose.yaml
 
 ## Setup
 
-After cloning kijufy-backend into your desired folder.
+After cloning jobs-app into your desired folder.
 
 Go to root folder and run `docker-compose up -d`
 
-When installation is done, go into the kijufy-backend container via WSL2 with
+When installation is done, go into the jobs-app container via WSL2 with
 
 `docker exec -it jobs-app bash`. There install dependencies with
-
-<!-- `docker exec -it kijufy-remixjs sh`. -->
 
 `composer install` or use
 
@@ -57,4 +55,6 @@ you can also run other commands in your container without entering it
 When dependencies are installed try visiting
 
 - `https://jobs-app.alphadev.local/`.
-<!-- - `https://kijufy.alphadev.local/`. -->
+
+run tests
+- `docker-compose exec -w /var/www/jobs-app/ jobs-app ./vendor/bin/phpunit ./tests`
